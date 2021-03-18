@@ -9,11 +9,11 @@
 - `database_full_explore.ipynb` - исследование наскрапленного датасета и создание таблиц
 
 Деплой
-https://statusquoteseu2.herokuapp.com/
+https://statusquoteseu3.herokuapp.com/
 
 Документация:
-- https://statusquoteseu2.herokuapp.com/docs
-- https://statusquoteseu2.herokuapp.com/redoc
+- https://statusquoteseu3.herokuapp.com/docs
+- https://statusquoteseu3.herokuapp.com/redoc
 
 ---------
 
