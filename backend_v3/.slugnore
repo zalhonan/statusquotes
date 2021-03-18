@@ -1,0 +1,6 @@
+/csv/
+/utilites/
+/.ipynb_checkpoints/
+/scraping_citaty_info/
+*.py
+*.ipynb

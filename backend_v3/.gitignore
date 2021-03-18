@@ -1,0 +1,13 @@
+*.db
+*.csv
+database.db
+
+.ipynb_checkpoints
+
+/csv_2/
+/csv/
+/scraping_citaty_info/
+/scraping_jsons/
+/.ipynb_checkpoints/
+database.db
+
