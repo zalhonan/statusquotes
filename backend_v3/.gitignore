@@ -1,7 +1,6 @@
 *.db
-*.csv
 database.db
-
+*.csv
 .ipynb_checkpoints
 
 /csv_2/
@@ -9,5 +8,4 @@ database.db
 /scraping_citaty_info/
 /scraping_jsons/
 /.ipynb_checkpoints/
-database.db
 

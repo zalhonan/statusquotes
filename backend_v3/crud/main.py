@@ -43,17 +43,31 @@ max_author_id = 18735
 max_tag_id = 3946
 cache = {}
 
+
 @app.get("/")
 def glagne():
     return "Nothing to see here. Move along!"
 
+# текущая версия базы данных (начинаем с новой схемы) и дата последнего обновления YYYY-MM-DD
+@app.get("/version/", response_model=schemas.Version)
+def get_version():
+    version = schemas.Version(
+        version="1.0.0",
+        date="2021-03-22"
+    )
+    return version
+
+
 # бекграунды по языку
 @app.get("/backgrounds/", response_model=List[schemas.Background])
 def get_backgrounds(language: str = 'ru', db: Session = Depends(get_db)):
-    db_backgrounds = crud.get_backgrounds(db, language_id=languages.get(language, 1))
+    db_backgrounds = crud.get_backgrounds(
+        db, language_id=languages.get(language, 1))
     return db_backgrounds
 
 # короткие цитаты по id автора
+
+
 @app.get("/random_quote_short/", response_model=schemas.QuoteShort)
 def get_random_quote(author_id: int = 177, db: Session = Depends(get_db)):
     if author_id > max_author_id:
@@ -64,6 +78,8 @@ def get_random_quote(author_id: int = 177, db: Session = Depends(get_db)):
     return random_quote
 
 # авторы по имени с подсчетом цитат
+
+
 @app.get("/authors_by_name/", response_model=List[schemas.Author])
 def get_authors_by_name(author: str = 'Будда', db: Session = Depends(get_db)):
     authors_list = crud.get_authors_by_name(
@@ -78,10 +94,10 @@ def get_tags_by_author(author_id: int = 177, db: Session = Depends(get_db)):
     if author_id > max_author_id:
         author_id = 164
 
-    cache_key = "tags_by_author_{author_id}"
-    
+    cache_key = f"tags_by_author_{author_id}"
+
     if cache_key in cache:
-        result = cache[cache_key]    
+        result = cache[cache_key]
     else:
         result = crud.get_tags_by_author(
             db,
@@ -90,6 +106,8 @@ def get_tags_by_author(author_id: int = 177, db: Session = Depends(get_db)):
     return result
 
 # цитаты коротко по тегу и автору
+
+
 @app.get("/quotes_by_tag_author/", response_model=List[schemas.QuoteShort])
 def get_quotes_by_tag_author(author_id: int = 177, tag_id: int = 50, db: Session = Depends(get_db)):
     if author_id > max_author_id:
@@ -103,4 +121,3 @@ def get_quotes_by_tag_author(author_id: int = 177, tag_id: int = 50, db: Session
         tag_id=tag_id)
 
     return result
-
